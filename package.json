@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "vercel-build": "prisma migrate deploy --schema=./backend/prisma/schema.prisma && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
     "postinstall": "prisma generate --schema=./backend/prisma/schema.prisma"

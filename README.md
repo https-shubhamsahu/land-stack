@@ -2,6 +2,20 @@
 
 LandStack is a modern digital land-governance and property information platform designed to make land records, property services, and administrative workflows more accessible, transparent, and structured.
 
+## Deploy to Vercel
+
+The frontend and Express API are deployed together. The frontend calls `/api`, so it always reaches the API function on the same Vercel deployment.
+
+Before deploying, add these environment variables under **Vercel → Project Settings → Environment Variables** for Production (and Preview if you use previews):
+
+- `DATABASE_URL` — a reachable PostgreSQL connection string. Include `?sslmode=require` when your provider requires SSL.
+- `JWT_SECRET` — a long random secret, for example from `openssl rand -base64 32`.
+- `FRONTEND_URL` — the production site URL, such as `https://your-domain.example`, when using a custom domain or a separately hosted frontend. Vercel's deployment URL is allowed automatically.
+
+The repository config runs `npm run vercel-build`, which applies pending Prisma migrations before building the Vite app. Do not set `VITE_API_BASE_URL` in Vercel unless the API is intentionally hosted on a different domain; the default `/api` is the correct value for this repository.
+
+For local development, keep `VITE_API_BASE_URL=http://localhost:5000/api` in `.env.development` and put the database and JWT values in an untracked `.env` file based on `.env.example`.
+
 The platform follows a GIS and Digital Public Infrastructure–inspired approach, connecting citizens, land/property records, service requests, and government-style workflows through a unified web application.
 
 ## 🚀 Features

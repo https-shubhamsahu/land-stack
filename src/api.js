@@ -1,3 +1,5 @@
+// A relative URL keeps the browser and API on the same Vercel deployment.
+// Local development can override it in .env.development.
 const API_BASE = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api');
 
 export const getAuthToken = () => localStorage.getItem('landstack_jwt');
